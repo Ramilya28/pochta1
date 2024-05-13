@@ -6,7 +6,16 @@
     <h2>Product List</h2>
     <ul>
         {% for product in products %}
-            <li><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></li>
+            <li>
+                <a href="{% url 'product_detail' product.pk %}">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <p>No Image Available</p>
+                    {% endif %}
+                </a>
+                <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
+            </li>
         {% endfor %}
     </ul>
     <a href="{% url 'create_product' %}">Create New Product</a>

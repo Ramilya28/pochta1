@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Статус продукта</h1>
+    <p>Продукт: {{ product.name }}</p>
+    <p>Описание: {{ product.description }}</p>
+    <p>Цена: {{ product.price }}</p>
+    
+    <h2>Статус доставки</h2>
+    <p>Статус: {{ delivery_status.status }}</p>
+    <p>Дата доставки: {{ delivery_status.delivery_date }}</p>
+    <p>Место доставки: {{ delivery_status.delivery_location }}</p>
+{% endblock %}

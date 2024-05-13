@@ -24,6 +24,13 @@ class ProductCreateView(CreateView):
     template_name = 'create_product.html'
     success_url = reverse_lazy('product_list')
 
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -36,3 +43,4 @@ class ProductDeleteView(DeleteView):
     model = Product
     template_name = 'delete_product.html'
     success_url = reverse_lazy('product_list')
+    

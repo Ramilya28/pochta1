@@ -1,8 +1,4 @@
-
 from django.contrib import admin
-from .models import Client, Employee, Order, Product
+from .models import Product
 
-admin.site.register(Client)
-admin.site.register(Employee)
-admin.site.register(Order)
 admin.site.register(Product)
