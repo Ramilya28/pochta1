@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -5,11 +6,21 @@ from django.urls import reverse_lazy
 from .models import Product
 from .forms import ProductForm
 
+from datetime import datetime
 
 class ProductListView(View):
     def get(self, request):
         products = Product.objects.all()
-        return render(request, 'product_list.html', {'products': products})
+        current_day_of_week = datetime.now().strftime('%A')
+        return render(request, 'product_list.html', {'products': products, 'current_day_of_week': current_day_of_week})
+
+
+# class ProductListView(View):
+#     def get(self, request):
+#         latest_products = Product.objects.order_by('-id')[:5]
+#         current_day_of_week = datetime.now().strftime('%A')
+#         return render(request, 'product_list.html', {'products': latest_products, 'current_day_of_week': current_day_of_week})
+
 
 
 class ProductDetailView(View):
@@ -44,3 +55,13 @@ class ProductDeleteView(DeleteView):
     template_name = 'delete_product.html'
     success_url = reverse_lazy('product_list')
     
+
+# from django.shortcuts import render, get_object_or_404
+# from django.contrib.auth.mixins import LoginRequiredMixin
+
+# class ProductDetailView(LoginRequiredMixin, View):
+#     login_url = '/login/'  # URL для перенаправления неавторизованных пользователей
+
+#     def get(self, request, pk):
+#         product = get_object_or_404(Product, pk=pk)
+#         return render(request, 'product_detail.html', {'product': product})
